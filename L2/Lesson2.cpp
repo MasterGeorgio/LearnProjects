@@ -7,32 +7,35 @@
 
 using namespace std;
 
-
-#include <math.h>
-
-
 // task 1
 class Fruit
 {
 public:
-	friend class Apple;
-public:
-	Fruit() {
+	Fruit(string color,
+		  string name) : m_color(color), m_name(name){}
+
+	Fruit(std::string color = "")
+	{
+		setColor(color);
 	}
-	Fruit(string color) {
+
+	void setName(std::string name)
+	{
+		m_name = name;
+	}
+
+	void setColor(std::string color)
+	{
 		m_color = color;
 	}
-	Fruit(
-		string color,
-		string name) {
-		m_color = color;
-		m_name  = name;
-	}
-	string getName() {
+
+	const std::string& getName() const
+	{
 		return m_name;
 	}
 
-	string getColor() {
+	const std::string& getColor() const
+	{
 		return m_color;
 	}
 private:
@@ -40,38 +43,39 @@ private:
 	string m_color;
 };
 
-class Apple: public Fruit
+class Apple : public Fruit
 {
 public:
-	Apple()
+	Apple(std::string color = "")
 	{
-		Fruit("green", "apple");
+		if (color == "")
+			color = "green";
+
+		setName("apple");
+		setColor(color);
 	}
-	Apple(string color)
-	{
-		Fruit(color, "apple");
-	}
-private:
 };
 
 class Banana : public Fruit
 {
 public:
-	Banana()
+	Banana(std::string color = "")
 	{
-		Fruit("yellow", "banana ");
+		if (color == "")
+			color = "yellow";
+
+		setName("banana");
+		setColor(color);
 	}
-	Banana(string color)
-	{
-		Fruit(color, "banana ");
-	}
-private:
 };
 
 class GrannySmith : public Apple
 {
 public:
-private:
+	GrannySmith()
+	{
+		setName("Granny Smith " + Apple::getName());
+	}
 };
 
 int main()
