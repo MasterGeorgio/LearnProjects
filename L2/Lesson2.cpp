@@ -2,8 +2,9 @@
 
 #include <iostream>
 #include <iomanip>
-
 #include <string>
+
+#include "Task1.h"
 
 using namespace std;
 
