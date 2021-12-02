@@ -6,7 +6,6 @@
 
 #include "Task1.h"
 
-using namespace std;
 
 // task 1
 class Fruit
@@ -79,6 +78,9 @@ public:
 	}
 };
 
+// Init cout
+size_t Person::m_dwCountStudent = 0;
+
 int main()
 {
 	// Task 1
@@ -92,5 +94,30 @@ int main()
 
 	// Task 2
 
+	const int N = 3;
+	Student* pers[ N ];
+
+	for (int i = 0; i < N; i++)
+	{
+		int year, wight, age;
+		string name, sex;
+		cout << "Enter name age sex weight age:" << endl;
+		cin >> name >> age >> sex >> wight >> year;
+		pers[i] = new Student(year, name, age, sex, wight);
+		pers[i]->AddYear(i + 1);
+	}
+
+	cout << "Count students:" << Person::getCount() << endl;
+	for (int i = 0; i < N; i++)
+		pers[i]->Print();
+
+	for (int i = 0; i < N; i++)
+		delete pers[i];
+	
 	system("pause");
 }
+/*
+11 22 33 44 55
+33 55 11 44 22
+33 44 55 11 22
+*/
