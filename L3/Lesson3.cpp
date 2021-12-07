@@ -1,4 +1,4 @@
-// TstForm.cpp : Defines the entry point for the console application.
+﻿// TstForm.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -123,7 +123,7 @@ private:
 	string m_model;
 };
 
-class PassengerCar : public Car {
+class PassengerCar : virtual public Car {
 public:
 	PassengerCar(string company,
 		string model) : Car(company, model) {
@@ -138,7 +138,7 @@ private:
 	string m_model;
 };
 
-class Bus : public Car {
+class Bus : virtual public Car {
 public:
 	Bus(string company,
 		string model) : Car(company, model) {
@@ -148,7 +148,7 @@ public:
 class Minivan : public Bus, public PassengerCar {
 public:
 	Minivan(string company,
-		string model) : Bus(company, model), PassengerCar(company, model) {
+		string model) : Car(company, model), Bus(company, model), PassengerCar(company, model) {
 	}
 };
 /////////
@@ -156,10 +156,11 @@ public:
 /////////
 
 /////////
-// Task 1
+// Task 3
 /////////
 class Fraction {
 public:
+	// function
 	Fraction(int num, int dem) {
 		if (dem == 0)
 			return;
@@ -174,32 +175,100 @@ public:
 		m_num = num;
 		m_dem = dem;
 	};
-	/*/
-	Fraction operation + () {
+
+
+	/**/
+	Fraction operator+() {
+		return Fraction(m_num, m_dem);
 	}
-	*/
+	/**/
 private:
+	// variable
 	int m_num;
 	int m_dem;
+
+	// function
+private:
+	void reduce() {
+
+	}
 };
 /////////
 // End Task 3
 /////////
 
+
+/////////
+// Task 4
+/////////
+enum eCardSuit {
+	// ♠
+	Spade,
+	// ♣
+	Club,
+	// ♦
+	Diamond,
+	// ♥
+	Heart
+};
+
+enum eCardValue {
+	Ace = 1,
+	Two,
+	Three,
+	Four,
+	Five,
+	Six,
+	Seven,
+	Eight,
+	Nine,
+	Ten,
+	Jack  = Ten,
+	Queen = Ten,
+	King  = Ten,
+};
+
+class Card {
+	// methods
+public:
+	Card(eCardSuit Suit,
+		eCardValue Value,
+		bool       Pos = false) : m_eSuit(Suit), m_eValue(Value), m_bPos(Pos) {}
+
+	// variable
+private:
+	eCardSuit  m_eSuit;
+	eCardValue m_eValue;
+	bool       m_bPos;
+
+	// methods
+private:
+	bool Flip() {
+		return m_bPos ^= true;
+	}
+
+	eCardValue GetValue() {
+		return m_eValue;
+	}
+};
+/////////
+// End Task 4
+/////////
 int main()
 {
 	// Task 1
-	// Task 2
 	PassengerCar passCar("mazda", "x5");
 	Bus          busCar("mazda", "x4");
 	Minivan      mnvCar("mazda", "x6");
 
+	// Task 2
 	Square Cube(2);
 	cout << Cube.area() << '\n';
 	Rhombus Romb(2, 2);
 	cout << Romb.area() << '\n';
 
 	// Task 3
+
 
 	system("pause");
 }
