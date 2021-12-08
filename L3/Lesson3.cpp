@@ -160,6 +160,8 @@ public:
 /////////
 class Fraction {
 public:
+	Fraction(){}
+
 	// function
 	Fraction(int num, int dem) {
 		if (dem == 0)
@@ -175,13 +177,13 @@ public:
 		m_num = num;
 		m_dem = dem;
 	};
-
-
-	/**/
-	Fraction operator+() {
-		return Fraction(m_num, m_dem);
+	int getNum() {
+		return m_num;
 	}
-	/**/
+	int getDem() {
+		return m_dem;
+	}
+
 private:
 	// variable
 	int m_num;
@@ -193,6 +195,10 @@ private:
 
 	}
 };
+Fraction operator+(Fraction d1, Fraction d2) {
+
+	return Fraction(d1.getNum(), d2.getDem());
+}
 /////////
 // End Task 3
 /////////
@@ -226,6 +232,7 @@ enum eCardValue {
 	Jack  = Ten,
 	Queen = Ten,
 	King  = Ten,
+	Ace11
 };
 
 class Card {
@@ -235,14 +242,6 @@ public:
 		eCardValue Value,
 		bool       Pos = false) : m_eSuit(Suit), m_eValue(Value), m_bPos(Pos) {}
 
-	// variable
-private:
-	eCardSuit  m_eSuit;
-	eCardValue m_eValue;
-	bool       m_bPos;
-
-	// methods
-private:
 	bool Flip() {
 		return m_bPos ^= true;
 	}
@@ -250,10 +249,17 @@ private:
 	eCardValue GetValue() {
 		return m_eValue;
 	}
+
+	// variable
+private:
+	eCardSuit  m_eSuit;
+	eCardValue m_eValue;
+	bool       m_bPos;
 };
 /////////
 // End Task 4
 /////////
+
 int main()
 {
 	// Task 1
@@ -268,7 +274,11 @@ int main()
 	cout << Romb.area() << '\n';
 
 	// Task 3
+	Fraction dr1(3, 4);
+	Fraction dr2(4, 4);
+	Fraction dr3;
 
+	dr3 = dr1 + dr2;
 
 	system("pause");
 }
