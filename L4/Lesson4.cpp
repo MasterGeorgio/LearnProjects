@@ -278,7 +278,7 @@ public:
 		m_Hand.clear();
 	}
 
-	size_t GetValue() {
+	size_t GetTotal() {
 		size_t dwCountAce = 0;
 		size_t dwSum = 0;
 		for (size_t i = 0; i < m_Hand.size(); i++)

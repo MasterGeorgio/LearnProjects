@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+#include "BJack.h"
+
 using namespace std;
 
 #define VAR_ONE
@@ -67,25 +69,50 @@ ostream &endll(ostream &stream)
 // -----
 
 
-// Test class Hand. That is need for work of valid
-class Hand {
-public:
-	size_t GetValue();
-};
-
+// -----
+// Task 3
+// -----
 class GenericPlayer : public Hand
 {
 public:
+	friend ostream& operator<<(ostream& os, const GenericPlayer& aGenericPlayer)
+	{
+		os << aGenericPlayer.m_strName << ":\t";
+
+		vector<Card*>::const_iterator pCard;
+		if (!aGenericPlayer.m_Cards.empty())
+		{
+			for (pCard = aGenericPlayer.m_Cards.begin();
+				pCard != aGenericPlayer.m_Cards.end();
+				++pCard)
+			{
+				// Пример из методички не комилируется
+				//os << *(*pCard) << "\t";
+			}
+
+			if (aGenericPlayer.GetTotal() != 0)
+			{
+				cout << "(" << aGenericPlayer.GetTotal() << ")";
+			}
+		}
+		else
+		{
+			os << "<empty>";
+		}
+
+		return os;
+	}
+
 	GenericPlayer(string name) : m_strName(name) {}
 	virtual ~GenericPlayer() {
 	}
 
 	virtual bool IsHitting() {
-		//return (GetValue() < 21);
+		//return (GetTotal() < 21);
 	}
 
 	bool IsBoosted() {
-		return (GetValue() > 21);
+		return (GetTotal() > 21);
 	}
 
 	void Bust() {
@@ -98,12 +125,13 @@ protected:
 };
 
 class Player : public GenericPlayer {
+
 public:
 	virtual bool IsHitting() {
 		cout << m_strName << ", another card? y/n";
 		char cAnswer = ' ';
 		cin >> cAnswer;
-		return cAnswer == 'y' || cAnswer == 'Y';
+		return (cAnswer == 'y' || cAnswer == 'Y');
 	}
 
 	void Win() const {
@@ -124,24 +152,23 @@ public:
 	virtual ~House();
 
 	virtual bool IsHitting() {
-		return (GetValue() <= 16);
+		return (GetTotal() <= 16);
 	}
 
 	void FlipFirstCard()
 	{
-		/**
-		if (m_Card.empty() == 0)
-		cout << "Not card" << endl;
+		if (m_Cards.empty())
+			cout << "Not card << endl";
 		else
-		m_Card[0]->Flip();
-		/**/
+			m_Cards[0]->Flip();
 	}
-};
+}; 
+
 
 void main()
 {
 	// Task 1
-	//Input();
+	Input();
 
 	// Task 2
 	cout << "Test" << endll << "test" << endl;
