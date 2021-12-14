@@ -52,17 +52,20 @@ void Input() {
 // End Task 1
 // -----
 
-/*
+
+
 // -----
 // Task 2
 // -----
-ostream& ddendl(ofstream& out) {
-return out << endl << endl;
+ostream &endll(ostream &stream)
+{
+	stream.clear();
+	return stream << endl << endl;
 }
 // -----
 // End Task 2
 // -----
-*/
+
 
 // Test class Hand. That is need for work of valid
 class Hand {
@@ -137,8 +140,11 @@ public:
 
 void main()
 {
-	Input();
+	// Task 1
+	//Input();
 
+	// Task 2
+	cout << "Test" << endll << "test" << endl;
 
 	system("pause");
 }
