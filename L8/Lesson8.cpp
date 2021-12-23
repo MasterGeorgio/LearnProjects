@@ -19,21 +19,16 @@ double div(T a, T b) {
 }
 
 
-class Robot
-{
-public:
-	Robot() {}
-	~Robot() {}
-
-private:
-
-};
-
-
 class Ex
 {
 public:
-	Ex(double x) : m_x(x) {}
+	Ex(double x) try : m_x(x) {
+		throw m_x;
+	}
+	catch (double dbV)
+	{
+		cerr << "Exeption: " << dbV << endl;
+	}
 	~Ex() {}
 
 private:
@@ -57,6 +52,19 @@ private:
 	double m_y;
 };
 
+
+
+class Robot
+{
+public:
+	Robot() {}
+	~Robot() {}
+
+private:
+
+};
+
+
 void main()
 {
 	// Task 1
@@ -72,9 +80,8 @@ void main()
 	do {
 		cout << "Enter value:" << endl;
 		cin >> nParam;
-		bar.set(nParam);
 		try {
-
+			bar.set(nParam);
 		}
 		catch (...){
 
